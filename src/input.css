@@ -17,4 +17,21 @@
         .cell:hover {
             background-color: #625341; 
         }
+        #msg {
+            position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1000;
+        padding: 32px;
+        background-color: #221E1B;
+        color: #EAE0D5;
+        border-radius: 0.75rem;
+        text-align: center;
+        font-size: 2rem;
+        display: none
+}
+        #msg.show{
+            display:block
+        }
     }
