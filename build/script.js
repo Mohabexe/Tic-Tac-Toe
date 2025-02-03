@@ -9,15 +9,46 @@ document.addEventListener("DOMContentLoaded", () => {
             const msgElement = document.querySelector("#msg");
             msgElement.classList.remove("show");
         }
+        const showPlayersInput = () => {
+          const playersInfo = document.querySelector("#PlayersInput")
+          playersInfo.classList.remove("hidden")
+        }
+        const buttonsPlacementAdd = () => {
+          const buttons = document.querySelector("#Buttons")
+          buttons.classList.add("p-8")
+        }
+        const buttonsPlacementRemove = () => {
+          const buttons = document.querySelector("#Buttons")
+          buttons.classList.remove("p-8")
+        }
+        const hidePlayersInput = () => {
+          const playersInfo = document.querySelector("#PlayersInput")
+          playersInfo.classList.add("hidden")
+        }
+        const hideBoard = () => {
+          const gameBoard = document.querySelector("#GameBoard")
+          gameBoard.classList.add("hidden")
+        }
+        const showBoard = () => {
+          const gameBoard = document.querySelector("#GameBoard")
+          gameBoard.classList.remove("hidden")
+        }
         return {
             renderMsg,
-            hideMsg
+            hideMsg,
+            showPlayersInput,
+            hidePlayersInput,
+            buttonsPlacementAdd,
+            buttonsPlacementRemove,
+            hideBoard,
+            showBoard,
         }
     })()
 
     const gameBoard = (function () {
         let board = ["", "", "", "", "", "", "", "", ""]
         const render = () => {
+            display.showBoard()
             let boardHTML = ""
             board.forEach((cell, index) => {
                 boardHTML += `<div class="cell" id="cell-${index}">${cell}</div>`
@@ -68,6 +99,8 @@ document.addEventListener("DOMContentLoaded", () => {
             ]
             currentPlayerIndex = 0
             gameOver = false
+            display.hidePlayersInput()
+            display.buttonsPlacementAdd()
             gameBoard.render()
         }
 
@@ -100,12 +133,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const startBtn = document.querySelector("#StartBtn")
     startBtn.addEventListener("click", () => {
+      display.buttonsPlacementAdd()
         game.start()
+        display.showBoard()
     })
 
     const resetBtn = document.querySelector("#ResetBtn")
     resetBtn.addEventListener("click", () => {
+        display.showPlayersInput()
         gameBoard.reset()
+        display.buttonsPlacementRemove()
+        display.hideBoard()
     })
 
     function checkForWin(board, marker) {
